@@ -54,14 +54,56 @@ void Board::drawCells()
 void Board::addFigures()
 {
     for (int i = 0; i < 8; ++i) {
-        cellsToPieces[&cells[i][1]] = new Pawn(cells[i][1].x(), cells[i][1].y(), true);
-        this->addItem(cellsToPieces.value(&cells[i][1]));
-    }
-    for (int i = 0; i < 8; ++i) {
-        cellsToPieces[&cells[i][6]] = new Pawn(cells[i][6].x(), cells[i][6].y(), false);
+        cellsToPieces[&cells[i][6]] = new Pawn(cells[i][6].x(), cells[i][6].y(), true);
         this->addItem(cellsToPieces.value(&cells[i][6]));
     }
+    for (int i = 0; i < 8; ++i) {
+        cellsToPieces[&cells[i][1]] = new Pawn(cells[i][1].x(), cells[i][1].y(), false);
+        this->addItem(cellsToPieces.value(&cells[i][1]));
+    }
+    //КРИНЧИК_САМОДЕЛКИН_СТАРТ
+    for (int j = 0; j < 8; j = j+7) {
+        cellsToPieces[&cells[j][7]] = new Rook(cells[j][7].x(), cells[j][7].y(), true);
+        this->addItem(cellsToPieces.value(&cells[j][7]));
+    }
+    for (int j = 0; j < 8; j = j+7) {
+        cellsToPieces[&cells[j][0]] = new Rook(cells[j][0].x(), cells[j][0].y(), false);
+        this->addItem(cellsToPieces.value(&cells[j][0]));
+    }
 
+    cellsToPieces[&cells[4][7]] = new King(cells[4][7].x(), cells[4][7].y(), true);
+    this->addItem(cellsToPieces.value(&cells[4][7]));
+
+    cellsToPieces[&cells[4][0]] = new King(cells[4][0].x(), cells[4][0].y(), false);
+    this->addItem(cellsToPieces.value(&cells[4][0]));
+
+    cellsToPieces[&cells[3][7]] = new Queen(cells[3][7].x(), cells[3][7].y(), true);
+    this->addItem(cellsToPieces.value(&cells[3][7]));
+
+    cellsToPieces[&cells[3][0]] = new Queen(cells[3][0].x(), cells[3][0].y(), false);
+    this->addItem(cellsToPieces.value(&cells[3][0]));
+
+    for (int j = 1; j < 8; j = j+5) {
+    cellsToPieces[&cells[j][0]] = new Knight(cells[j][0].x(), cells[j][0].y(), false);
+    this->addItem(cellsToPieces.value(&cells[j][0]));
+    }
+
+    for (int j = 1; j < 8; j = j+5) {
+    cellsToPieces[&cells[j][7]] = new Knight(cells[j][7].x(), cells[j][7].y(), true);
+    this->addItem(cellsToPieces.value(&cells[j][7]));
+    }
+
+    for (int j = 2; j < 8; j = j+3) {
+    cellsToPieces[&cells[j][0]] = new Bishop(cells[j][0].x(), cells[j][0].y(), false);
+    this->addItem(cellsToPieces.value(&cells[j][0]));
+    }
+
+    for (int j = 2; j < 8; j = j+3) {
+    cellsToPieces[&cells[j][7]] = new Bishop(cells[j][7].x(), cells[j][7].y(), true);
+    this->addItem(cellsToPieces.value(&cells[j][7]));
+    }
+
+    //КРИНЧИК_САМОДЕЛКИН_ФИНИШ
 }
 
 //тут какую-нибуд  проверку возможен ли ход

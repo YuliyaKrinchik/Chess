@@ -5,6 +5,11 @@
 #include "cell.h"
 #include "chesspiece.h"
 #include "pawn.h"
+#include "rook.h"
+#include "king.h"
+#include "knight.h"
+#include "queen.h"
+#include "bishop.h"
 
 class Board :  public QGraphicsScene
 {
