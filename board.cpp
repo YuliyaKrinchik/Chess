@@ -40,12 +40,14 @@ void Board::drawCells()
             cells[i][j].setX(39 + i*90);
             cells[i][j].setY(39 + j*90);
             QRectF * rect = new QRectF();
-                       rect->setWidth(90);
-                       rect->setHeight(90);
-                       cells[i][j].setRect(*rect);
-                       cells[i][j].setX(39 + i*90);
-                       cells[i][j].setY(39 + j*90);
-                       this->addItem(&cells[i][j]);
+            rect->setWidth(90);
+            rect->setHeight(90);
+            cells[i][j].setRect(*rect);
+            cells[i][j].setX(39 + i*90);
+            cells[i][j].setY(39 + j*90);
+            cells[i][j].column = i;
+            cells[i][j].row = j;
+            this->addItem(&cells[i][j]);
         }
     }
 }
@@ -109,10 +111,12 @@ void Board::addFigures()
 //тут какую-нибуд  проверку возможен ли ход
 void Board::move()
 {
-    if (cellsToPieces.contains(previousClickedCell))
+    if (cellsToPieces.contains(previousClickedCell) &&
+            cellsToPieces[previousClickedCell]->figureCanMove(previousClickedCell, clickedCell))
     {
         cellsToPieces[previousClickedCell]->setPos(clickedCell->pos());
         cellsToPieces.insert(clickedCell, cellsToPieces[previousClickedCell]);
         cellsToPieces.remove(previousClickedCell);
     }
 }
+

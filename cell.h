@@ -9,6 +9,8 @@ class Cell : public QObject, public QGraphicsRectItem
     Q_OBJECT
 public:
     Cell();
+    int row;
+    int column;
 };
 
 
