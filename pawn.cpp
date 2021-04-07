@@ -1,5 +1,11 @@
 #include "pawn.h"
 
-
-Pawn::Pawn(int x, int y):  ChessPiece(x,y)
-{ }
+Pawn::Pawn(int x, int y, bool color) : ChessPiece(x, y)
+{
+    if (color) {
+        this->setPixmap(QPixmap::fromImage(*whiteImage).scaled(90,90));
+    }
+    else {
+        this->setPixmap(QPixmap::fromImage(*blackImage).scaled(90,90));
+    }
+}

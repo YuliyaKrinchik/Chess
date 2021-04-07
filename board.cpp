@@ -1,7 +1,6 @@
 #include "board.h"
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
-#include <pawn.h>
 
 Board::Board()
 {
@@ -18,12 +17,14 @@ void Board::mousePressEvent(QGraphicsSceneMouseEvent *event)
         clickedCell = &cells[(int(event->scenePos().x() - 39 )/ 90)][(int(event->scenePos().y() - 39 ) / 90)];
         mouseWasPressed = false;
         if (clickedCell != previousClickedCell) {
+            //previousClickedCell->
             emit secondClick();
         }
     }
     else
     {
         previousClickedCell = &cells[(int(event->scenePos().x() - 39 )/ 90)][(int(event->scenePos().y() - 39 ) / 90)];
+        //previousClickedCell->setBrush(Qt::red);
         mouseWasPressed = true;
     }
 }
@@ -36,10 +37,15 @@ void Board::drawCells()
 
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {
-
             cells[i][j].setX(39 + i*90);
             cells[i][j].setY(39 + j*90);
-
+            QRectF * rect = new QRectF();
+                       rect->setWidth(90);
+                       rect->setHeight(90);
+                       cells[i][j].setRect(*rect);
+                       cells[i][j].setX(39 + i*90);
+                       cells[i][j].setY(39 + j*90);
+                       this->addItem(&cells[i][j]);
         }
     }
 }
@@ -47,18 +53,20 @@ void Board::drawCells()
 //здесть надо добавить все фигурки, пока что она одна
 void Board::addFigures()
 {
-    for (int i =0; i<8;i++)
-    {
-        cellsToPieces[&cells[i][1]] = new Pawn(cells[i][1].x(), cells[i][1].y());
+    for (int i = 0; i < 8; ++i) {
+        cellsToPieces[&cells[i][1]] = new Pawn(cells[i][1].x(), cells[i][1].y(), true);
         this->addItem(cellsToPieces.value(&cells[i][1]));
     }
-
+    for (int i = 0; i < 8; ++i) {
+        cellsToPieces[&cells[i][6]] = new Pawn(cells[i][6].x(), cells[i][6].y(), false);
+        this->addItem(cellsToPieces.value(&cells[i][6]));
+    }
 
 }
-//проверка возможного хода
+
+//тут какую-нибуд  проверку возможен ли ход
 void Board::move()
 {
-   // qDebug() << "Called move" << Qt::endl;
     if (cellsToPieces.contains(previousClickedCell))
     {
         cellsToPieces[previousClickedCell]->setPos(clickedCell->pos());
@@ -66,4 +74,3 @@ void Board::move()
         cellsToPieces.remove(previousClickedCell);
     }
 }
-

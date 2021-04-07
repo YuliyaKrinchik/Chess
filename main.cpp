@@ -1,8 +1,6 @@
 #include <QApplication>
 #include <QGraphicsView>
-#include <QGraphicsRectItem>
 #include <QGraphicsScene>
-#include <cell.h>
 #include "board.h"
 
 int main(int argc, char *argv[])

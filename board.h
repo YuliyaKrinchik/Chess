@@ -1,11 +1,10 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QMap>
 #include "cell.h"
 #include "chesspiece.h"
-#include <QMainWindow>
+#include "pawn.h"
 
 class Board :  public QGraphicsScene
 {
