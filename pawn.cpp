@@ -15,7 +15,7 @@ bool Pawn::figureCanMove(const Cell *start, const Cell *end)
 {
     if (start->column == end->column)
     {
-        if (!this->color &&  end->row - start->row == 1) {
+        if (!this->color &&  (end->row - start->row == 1 || end->row - start->row == 2)) {
             return true;
         }
         else if ((start->row - end->row == 2 || start->row - end->row == 1)) {
